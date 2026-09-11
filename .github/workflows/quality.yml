@@ -1,0 +1,24 @@
+name: Quality
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Run static contract
+        run: |
+          python3 tests/test_static.py
+          node --check app.js
+      - name: Scan repository for secrets
+        run: |
+          docker run --rm -v "${{ github.workspace }}:/repo" zricethezav/gitleaks:v8.24.2 detect --source=/repo --no-git --redact --exit-code 1
