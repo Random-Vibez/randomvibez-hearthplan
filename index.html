@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A private, browser-local household readiness plan.">
+  <title>HearthPlan — a RandomVibez.ai project</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand-lockup" href="https://randomvibez.ai/" aria-label="RandomVibez.ai home"><img class="brand-logo" src="randomvibez-logo.jpg" alt="RandomVibez.ai"><span>HearthPlan <span class="brand-dot">· a RandomVibez.ai project</span></span></a>
+    <span class="local-badge">LOCAL-ONLY EDITION</span>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">A calm plan for the people you care about</p>
+        <h1 id="page-title">Hearth<span>Plan</span></h1>
+        <p class="lede">Capture the practical details your household may need when plans change. Everything you enter stays in this browser.</p>
+      </div>
+      <div class="score-card" aria-live="polite"><span class="score-label">Plan readiness</span><strong id="score">0%</strong><div class="meter"><span id="meter-fill"></span></div><span id="score-detail">0 of 12 checks</span></div>
+    </section>
+
+    <aside class="privacy-callout"><strong>Private by design.</strong> HearthPlan uses local browser storage only—no account, server, cookies, analytics, or network requests. Do not enter SSNs, diagnoses, prescription names, insurance numbers, or other sensitive secrets. This is not 911, an alert service, medical advice, or legal advice.</aside>
+    <div id="status" class="status" role="status" aria-live="polite" hidden></div>
+
+    <nav class="section-nav" aria-label="Plan sections">
+      <a href="#household">Household</a><a href="#people">People</a><a href="#places">Places</a><a href="#pets">Pets</a><a href="#go-bag">Go-bag</a><a href="#practice">Practice</a>
+    </nav>
+
+    <section id="household" class="panel">
+      <div class="section-heading"><div><p class="eyebrow">01 / foundation</p><h2>Household plan</h2></div><span class="step-dot">01</span></div>
+      <form id="household-form" class="form-grid">
+        <label>Household name<input name="home_label" maxlength="80" placeholder="e.g. The Rivera home"></label>
+        <label>Home base / address<input name="address" maxlength="240" placeholder="Optional — keep it general if preferred"></label>
+        <label class="wide">Notes<textarea name="notes" maxlength="1200" placeholder="What should everyone remember first?"></textarea></label>
+        <label>Out-of-town contact<input name="out_of_town_name" maxlength="80" placeholder="Name or role"></label>
+        <label>Contact phone<input name="out_of_town_phone" maxlength="32" inputmode="tel" placeholder="Optional"></label>
+        <label>Contact email<input name="out_of_town_email" maxlength="120" type="email" placeholder="Optional"></label>
+        <label class="wide">How we alert each other<textarea name="alert_plan" maxlength="1200" placeholder="Example: text first, then check in with the out-of-town contact"></textarea></label>
+        <label>Where we shelter<textarea name="shelter_plan" maxlength="1200" placeholder="Room or nearby safe place"></textarea></label>
+        <label>How we leave<textarea name="evacuation_plan" maxlength="1200" placeholder="Routes, transport, and a backup"></textarea></label>
+        <div class="form-actions wide"><button type="submit">Save household plan</button></div>
+      </form>
+    </section>
+
+    <div class="two-col">
+      <section id="people" class="panel"><div class="section-heading"><div><p class="eyebrow">02 / people</p><h2>People to check in with</h2></div></div><div id="people-list" class="item-list"></div><form id="person-form" class="add-form"><label>Name<input name="name" maxlength="80" required></label><label>Role<select name="role"><option>adult</option><option>child</option><option>caregiver</option><option>other</option></select></label><label>Mobile<input name="mobile" maxlength="32" inputmode="tel"></label><label>Pickup / support notes<input name="pickup_notes" maxlength="240"></label><label class="check"><input name="extra_help" type="checkbox"> May need extra help</label><button type="submit">Add person</button></form></section>
+      <section id="places" class="panel"><div class="section-heading"><div><p class="eyebrow">03 / places</p><h2>Meeting places</h2></div></div><div id="places-list" class="item-list"></div><form id="place-form" class="add-form"><label>Type<select name="kind"><option value="home_meet">In-home</option><option value="neighborhood">Neighborhood</option><option value="out_of_town">Out-of-town</option><option value="school">School / childcare</option><option value="work">Workplace</option><option value="other">Other</option></select></label><label>Name<input name="name" maxlength="80" required></label><label>Address / landmark<input name="address" maxlength="240"></label><label>Instructions<input name="instructions" maxlength="240"></label><button type="submit">Add place</button></form></section>
+    </div>
+
+    <section id="pets" class="panel"><div class="section-heading"><div><p class="eyebrow">04 / companions</p><h2>Pets</h2></div></div><div id="pets-list" class="item-list inline-list"></div><form id="pet-form" class="add-form pet-form"><label>Name<input name="name" maxlength="80" required></label><label>Type<input name="kind" maxlength="80" placeholder="Cat, dog, etc."></label><label>Notes<input name="notes" maxlength="240" placeholder="Carrier, food, comfort item"></label><button type="submit">Add pet</button></form></section>
+
+    <section id="go-bag" class="panel"><div class="section-heading"><div><p class="eyebrow">05 / supplies</p><h2>Go-bag checklist</h2><p class="muted">Track only whether an item is packed. Keep sensitive details offline.</p></div><span id="kit-count" class="pill">0 / 14 basics</span></div><div id="kit-list" class="kit-grid"></div></section>
+
+    <section id="practice" class="panel"><div class="section-heading"><div><p class="eyebrow">06 / confidence</p><h2>Practice logging</h2><p class="muted">A short rehearsal turns a written plan into a shared habit.</p></div></div><form id="practice-form" class="practice-form"><label>Date<input name="practiced_on" type="date" required></label><label class="wide">What did you practice?<textarea name="notes" maxlength="400" placeholder="What worked? What should change next time?"></textarea></label><button type="submit">Log practice</button></form><div id="practice-list" class="practice-list"></div></section>
+
+    <section class="panel tools-panel"><div><p class="eyebrow">Take it with you</p><h2>Save, restore, or print</h2><p class="muted">Exports are unencrypted JSON files. Store them carefully and do not include sensitive information.</p></div><div class="tool-actions"><button id="export-btn" type="button">Export plan</button><label class="button secondary">Import plan<input id="import-file" type="file" accept="application/json,.json" hidden></label><button id="print-btn" class="secondary" type="button">Print wallet cards</button><button id="reset-btn" class="text-button" type="button">Clear this browser</button></div></section>
+  </main>
+  <footer class="project-footer"><a class="project-footer-brand" href="https://randomvibez.ai/"><img src="randomvibez-logo.jpg" alt=""> <strong>A RandomVibez.ai Project</strong></a><p>ONLINE TOOLS. BUILT BY AI. FOR EVERYONE.</p><p><a href="https://randomvibez.ai/">Explore more projects at randomvibez.ai</a></p><p>This tool is not 911, an alert service, medical advice, or legal advice. In an emergency, contact your local emergency services.</p></footer>
+  <script src="app.js" defer></script>
+</body>
+</html>
