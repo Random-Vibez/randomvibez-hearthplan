@@ -1,6 +1,6 @@
 # HearthPlan public-safe edition
 
-A static, browser-local household readiness planner for RandomVibez.ai. This edition is intentionally separate from the original prototype at `/home/tomf/model-comparison/run-2/app`.
+A static, browser-local household readiness planner for RandomVibez.ai. This edition is intentionally separate from the original prototype at `/srv/example-app/original-prototype`.
 
 ## Public-safe architecture
 
